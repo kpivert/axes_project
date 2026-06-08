@@ -40,7 +40,7 @@ function App() {
     .range([BUBBLE_MIN_SIZE, BUBBLE_MAX_SIZE]);
 
   // console.log(Object.entries(data).slice(0, 10)); This is how you get first 10 rows. NB: Non inclusive
-  console.log(boundsHeight);
+  console.log(data);
 
   return (
     <>
@@ -55,7 +55,7 @@ function App() {
           width={boundsWidth}
           height={boundsHeight}
           transform={`translate(${MARGIN.left}, ${MARGIN.top})`}>
-          <rect width="100%" height="100%" fill="#ff0000" opacity={0.3}></rect>
+          <rect width="100%" height="100%" fill="#ff0000" opacity={0.1}></rect>
           <g transform={`translate(0, ${boundsHeight})`}>
             {/* Bottom Axis*/}
             <AxisBottom
@@ -71,6 +71,12 @@ function App() {
             label="Life Expectancy"
           />
           {/* Bubbles*/}
+          <Bubbles
+            data={data}
+            xScale={xScale}
+            yScale={yScale}
+            radiusScale={radiusScale}
+          />
         </g>
       </svg>
     </>
