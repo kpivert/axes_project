@@ -12,7 +12,12 @@ import Bubbles from "./Bubbles";
 
 const WIDTH = 600;
 const HEIGHT = 600;
-const MARGIN = { top: 20, right: 30, bottom: 50, left: 50 };
+const MARGIN = {
+  top: 20,
+  right: 30,
+  bottom: 50,
+  left: 50,
+};
 
 function App() {
   const boundsWidth = WIDTH - MARGIN.left - MARGIN.right;
@@ -43,7 +48,8 @@ function App() {
   const colorScale = d3
     .scaleOrdinal()
     .domain(data.map((d) => d.continent))
-    .range(d3.schemeCategory10);
+    // .range(d3.schemeCategory10);
+    .range(d3.schemeObservable10);
 
   // console.log(Object.entries(data).slice(0, 10)); This is how you get first 10 rows. NB: Non inclusive
   // const unique = [...new Set(data.map((d) => d.continent))]; This is how you get unique values
@@ -52,42 +58,65 @@ function App() {
 
   return (
     <>
-      <h1>Howdy!</h1>
-      <svg
-        width={WIDTH}
-        height={HEIGHT}
-        // style={{ overflow: "visible" }}
-      >
-        <rect width="100%" height="100%" fill="#cccccc" opacity={0.2} />
-        <g
-          width={boundsWidth}
-          height={boundsHeight}
-          transform={`translate(${MARGIN.left}, ${MARGIN.top})`}>
-          <rect width="100%" height="100%" fill="#00468b" opacity={0.1}></rect>
-          <g transform={`translate(0, ${boundsHeight})`}>
-            {/* Bottom Axis*/}
-            <AxisBottom
+      <div
+        style={{
+          width: 700,
+          textAlign: "left",
+        }}>
+        <h1>Howdy! This is Gapminder Data from 2007</h1>
+        <svg
+          width={WIDTH}
+          height={HEIGHT}
+          // style={{ overflow: "visible" }}
+        >
+          {/* Background Rect for Whole SVG */}
+          <rect width="100%" height="100%" fill="blue" opacity={1} />
+          <g
+            width={boundsWidth}
+            height={boundsHeight}
+            transform={`translate(${MARGIN.left}, ${MARGIN.top})`}>
+            {/* Background Rect for Bounds Area */}
+            <rect
+              width="100%"
+              height="100%"
+              // fill="red"
+              opacity={1}
+              stroke="#000"
+              strokeWidth="5"
+            />
+            <rect
+              width="100%"
+              height="100%"
+              fill="#fff"
+              opacity={1}
+              // stroke="#000"
+              // strokeWidth="30"
+            />
+            <g transform={`translate(0, ${boundsHeight})`}>
+              {/* Bottom Axis*/}
+              <AxisBottom
+                xScale={xScale}
+                pixelsPerTick={pixelsPerTick}
+                label="GDP"
+              />
+            </g>
+            {/* Left Axis*/}
+            <AxisLeft
+              yScale={yScale}
+              pixelsPerTick={50}
+              label="Life Expectancy"
+            />
+            {/* Bubbles*/}
+            <Bubbles
+              data={data}
               xScale={xScale}
-              pixelsPerTick={pixelsPerTick}
-              label="GDP"
+              yScale={yScale}
+              radiusScale={radiusScale}
+              colorScale={colorScale}
             />
           </g>
-          {/* Left Axis*/}
-          <AxisLeft
-            yScale={yScale}
-            pixelsPerTick={50}
-            label="Life Expectancy"
-          />
-          {/* Bubbles*/}
-          <Bubbles
-            data={data}
-            xScale={xScale}
-            yScale={yScale}
-            radiusScale={radiusScale}
-            colorScale={colorScale}
-          />
-        </g>
-      </svg>
+        </svg>
+      </div>
     </>
   );
 }

@@ -8,7 +8,8 @@ export const Bubbles = ({ data, xScale, yScale, radiusScale, colorScale }) => {
       cy={yScale(d.lifeExp)}
       r={radiusScale(d.pop)}
       fill={colorScale(d.continent)}
-      opacity={0.2}
+      fill-opacity={0.2}
+      stroke={colorScale(d.continent)}
     />
   ));
 };
