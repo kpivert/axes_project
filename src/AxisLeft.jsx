@@ -17,8 +17,8 @@ export const AxisLeft = ({ yScale, pixelsPerTick, label }) => {
       />
 
       {/* Ticks and Labels */}
-      {yScale.ticks(numberOfTicks).map((value, i) => (
-        <g transform={`translate(0, ${yScale(value)})`}>
+      {yScale.ticks(numberOfTicks).map((value) => (
+        <g key={value} transform={`translate(0, ${yScale(value)})`}>
           <line x2={-TICK_LENGTH} stroke="currentColor" />
           <text
             style={{
@@ -32,7 +32,13 @@ export const AxisLeft = ({ yScale, pixelsPerTick, label }) => {
       ))}
 
       <g>
-        <text>{label}</text>
+        <text
+          style={{
+            fontSize: "10px",
+            textAnchor: "start",
+          }}>
+          {label}
+        </text>
       </g>
     </>
   );

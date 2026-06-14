@@ -28,17 +28,21 @@ function App() {
   const popRange = d3.extent(data.map((d, i) => d.pop));
   // const continents = data.map((d) => d.continent);
   const BUBBLE_MIN_SIZE = 4;
-  const BUBBLE_MAX_SIZE = 25;
+  const BUBBLE_MAX_SIZE = 30;
   const pixelsPerTick = 60;
   const xScale = d3
     .scaleLinear()
-    .domain([gdpRange[0], gdpRange[1]])
-    .range([0, boundsWidth]);
+    // .domain([gdpRange[0], gdpRange[1]])
+    .domain([0, d3.max(data.map((d) => d.gdpPercap))])
+    // .range([10, boundsWidth]);
+    .range([10, boundsWidth])
+    .nice();
 
   const yScale = d3
     .scaleLinear()
     .domain([lifeExpRange[0], lifeExpRange[1]])
-    .range([boundsHeight - 30, 0]);
+    .range([boundsHeight - 30, 10])
+    .nice();
 
   const radiusScale = d3
     .scaleSqrt()
@@ -48,29 +52,35 @@ function App() {
   const colorScale = d3
     .scaleOrdinal()
     .domain(data.map((d) => d.continent))
-    // .range(d3.schemeCategory10);
-    .range(d3.schemeObservable10);
+    // .range(d3.schemeDark2);
+    .range(d3.schemeCategory10);
+  // .range(d3.schemeObservable10);
 
   // console.log(Object.entries(data).slice(0, 10)); This is how you get first 10 rows. NB: Non inclusive
   // const unique = [...new Set(data.map((d) => d.continent))]; This is how you get unique values
   const uniqueCountries = [...new Set(data.map((d) => d.country))];
-  console.log(uniqueCountries);
+  console.log(d3.min(data.map((d) => d.gdpPercap)));
+  console.log(xScale.ticks());
+  console.log(boundsWidth);
+  console.log(d3.extent(data.map((d) => d.gdpPercap)));
 
   return (
     <>
       <div
+        className="flex flex-col"
         style={{
           width: 700,
           textAlign: "left",
         }}>
-        <h1>Howdy! This is Gapminder Data from 2007</h1>
+        <h1 className="font-serif text-4xl">Up and To the Right</h1>
+        <h2 className="font-mono">Han's Rosling's Gapminder Data from 2007</h2>
         <svg
           width={WIDTH}
           height={HEIGHT}
           // style={{ overflow: "visible" }}
         >
           {/* Background Rect for Whole SVG */}
-          <rect width="100%" height="100%" fill="blue" opacity={1} />
+          {/* <rect width="100%" height="100%" fill="blue" opacity={0.1} /> */}
           <g
             width={boundsWidth}
             height={boundsHeight}
@@ -81,14 +91,14 @@ function App() {
               height="100%"
               // fill="red"
               opacity={1}
-              stroke="#000"
-              strokeWidth="5"
+              // stroke="#000"
+              // strokeWidth="5"
             />
             <rect
               width="100%"
               height="100%"
               fill="#fff"
-              opacity={1}
+              // opacity={1}
               // stroke="#000"
               // strokeWidth="30"
             />
@@ -97,14 +107,14 @@ function App() {
               <AxisBottom
                 xScale={xScale}
                 pixelsPerTick={pixelsPerTick}
-                label="GDP"
+                label="GDP (2007 $US)"
               />
             </g>
             {/* Left Axis*/}
             <AxisLeft
               yScale={yScale}
               pixelsPerTick={50}
-              label="Life Expectancy"
+              label="Life Expectancy (Years)"
             />
             {/* Bubbles*/}
             <Bubbles

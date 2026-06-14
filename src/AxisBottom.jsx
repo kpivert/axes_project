@@ -35,7 +35,15 @@ export const AxisBottom = ({ xScale, pixelsPerTick, boundsWidth, label }) => {
         </g>
       ))}
       <g>
-        <text>{label}</text>
+        <text
+          x={xScale(50000)}
+          y={TICK_LENGTH + 30}
+          style={{
+            fontSize: "10px",
+            textAnchor: "end",
+          }}>
+          {label}
+        </text>
       </g>
     </>
   );

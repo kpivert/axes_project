@@ -11,9 +11,11 @@
     "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.1",
     "d3": "^7.9.0",
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "tailwindcss": "^4.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
