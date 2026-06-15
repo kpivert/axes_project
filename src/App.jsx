@@ -73,7 +73,7 @@ function App() {
           textAlign: "left",
         }}>
         <h1 className="font-serif text-4xl">Up and To the Right</h1>
-        <h2 className="font-mono">Han's Rosling's Gapminder Data from 2007</h2>
+        <h2 className="font-mono">Hans Rosling's Gapminder Data from 2007</h2>
         <svg
           width={WIDTH}
           height={HEIGHT}
