@@ -67,13 +67,18 @@ function App() {
   return (
     <>
       <div
-        className="flex flex-col"
-        style={{
-          width: 700,
-          textAlign: "left",
-        }}>
-        <h1 className="font-serif text-4xl">Up and To the Right</h1>
-        <h2 className="font-mono">Hans Rosling's Gapminder Data from 2007</h2>
+        className="flex flex-col justify-center mx-auto text-left w-[700px]"
+        // style={{
+        //   display: "flex",
+        //   flexDirection: "column",
+        //   justifyContent: "center",
+        //   width: 700,
+        //   margin: "0 auto",
+        //   textAlign: "left",
+        // }}
+      >
+        <h1 className="font-display text-3xl">Up and To the Right</h1>
+        <h3 className="font-sans">Hans Rosling's Gapminder Data from 2007</h3>
         <svg
           width={WIDTH}
           height={HEIGHT}
@@ -86,7 +91,7 @@ function App() {
             height={boundsHeight}
             transform={`translate(${MARGIN.left}, ${MARGIN.top})`}>
             {/* Background Rect for Bounds Area */}
-            <rect
+            {/* <rect
               width="100%"
               height="100%"
               // fill="red"
@@ -101,7 +106,7 @@ function App() {
               // opacity={1}
               // stroke="#000"
               // strokeWidth="30"
-            />
+            /> */}
             <g transform={`translate(0, ${boundsHeight})`}>
               {/* Bottom Axis*/}
               <AxisBottom

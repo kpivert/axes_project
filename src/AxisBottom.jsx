@@ -2,7 +2,7 @@ import { scaleLinear, format } from "d3";
 
 const TICK_LENGTH = 6;
 
-const formatTick = format(",");
+const formatTick = format("$,");
 
 export const AxisBottom = ({ xScale, pixelsPerTick, boundsWidth, label }) => {
   const range = xScale.range();
