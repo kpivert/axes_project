@@ -54,6 +54,8 @@ function App() {
   const BUBBLE_MIN_SIZE = 4;
   const BUBBLE_MAX_SIZE = 30;
   const pixelsPerTick = 60;
+  // const point = data.find((d) => d.country === "United States");
+  const point = data.find((d) => d.country === "United States");
 
   const xScale = d3
     .scaleLinear()
@@ -78,9 +80,11 @@ function App() {
     .range(d3.schemeCategory10);
 
   const uniqueCountries = [...new Set(data.map((d) => d.country))];
+  console.log(data.find((d) => d.country === "United States"));
+
   return (
     <>
-      <div className="flex flex-col justify-center mx-auto text-left w-[700px]">
+      <div className="flex flex-col justify-center mx-auto text-left w-[700px] relative">
         <h1 className="font-display text-3xl">Up and To the Right</h1>
         <h3 className="font-sans">Hans Rosling's Gapminder Data from 2007</h3>
         <svg width={WIDTH} height={HEIGHT}>
@@ -113,6 +117,18 @@ function App() {
             />
           </g>
         </svg>
+        <div
+          style={{
+            position: "absolute",
+            left: MARGIN.left + xScale(point.gdpPercap),
+            top: MARGIN.top + yScale(point.lifeExp),
+            pointerEvents: "none", // so it doesn't block hover/click on the SVG underneath
+            fontSize: 12,
+            fontFamily: "inherit",
+            whiteSpace: "nowrap",
+          }}>
+          {point.country}
+        </div>
       </div>
     </>
   );
