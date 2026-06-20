@@ -55,7 +55,6 @@ function App() {
   const BUBBLE_MAX_SIZE = 30;
   const pixelsPerTick = 60;
   // const point = data.find((d) => d.country === "United States");
-  const point = data.find((d) => d.country === "United States");
 
   const xScale = d3
     .scaleLinear()
@@ -120,14 +119,25 @@ function App() {
         <div
           style={{
             position: "absolute",
-            left: MARGIN.left + xScale(point.gdpPercap),
-            top: MARGIN.top + yScale(point.lifeExp),
+            left: 200,
+            top: 280,
             pointerEvents: "none", // so it doesn't block hover/click on the SVG underneath
-            fontSize: 12,
+            fontSize: 14,
             fontFamily: "inherit",
             whiteSpace: "nowrap",
           }}>
-          {point.country}
+          {
+            <p>
+              <i>Area</i> represents population
+              <br></br>
+              <i>Fill</i> represents continents
+              <br></br>
+              <b style={{ color: "#1f77b4" }}>Darker Circles</b> indicate
+              d3❤️React
+              <br></br>
+              Cohort Participants' Home Countries
+            </p>
+          }
         </div>
       </div>
     </>
